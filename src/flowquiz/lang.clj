@@ -64,7 +64,6 @@
              '+ +,
              '== =} op) lhs rhs))))
 
-
 (defn- eval-expression [state expr]
   (let [st
         (reduce (fn [stack token]
@@ -89,10 +88,10 @@
         expr (drop 2 line)]
     (let [v (int (eval-expression state expr))
           state (assoc state var v)]
-      
+
       (if (< -1000 v 1000)
         state
-          (assoc state :error :overflow)))))
+        (assoc state :error :overflow)))))
 
 (defn- do-error [state line]
   (assoc state :error line))
@@ -113,12 +112,15 @@
 (defn exec [p cpu-limit]
   (loop [state {:pc 0}
          instruction-count 0]
-    
+
     (let [pc (:pc state)]
       (if (or (>= pc (count p)) (:end state) (:error state) (>= instruction-count cpu-limit))
         (assoc  state :instruction-count instruction-count)
         (recur (exec-line state (get p pc)) (inc instruction-count))))))
 
-
-
+(defn vars [prog]
+  (into (sorted-set)
+        (comp (filter (fn [line] (= '= (second line))))
+              (map first))
+        prog))
 

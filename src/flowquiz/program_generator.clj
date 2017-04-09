@@ -75,7 +75,7 @@
 
 (defn nice-program []
   (->> #(let [program (generate-program 3 20 20)]
-          [(map-indexed vector program)
+          [program
            (try  (l/exec program 100)
                  (catch Exception ex ex))])
        repeatedly
