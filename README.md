@@ -4,7 +4,7 @@ The idea is to be able to generate simple programs, display them to the user and
 
 The programs will be in a simple language resembling BASIC.
 
-Single uppercase letters are variable names; they are all integers.
+Single lowercase letters are variable names; they are all integers.
 
 Lines are labeled by numbers.
 
@@ -14,7 +14,9 @@ There is conditional and unconditional branching.
 
 If I have time I will write something that turns these programs into flowcharts.
 
-
+For now, the programs are presented to the user who will be asked for
+the final value of the variables in the program. Enter these values
+seperated by spaces in the text field provided.
 
 
 

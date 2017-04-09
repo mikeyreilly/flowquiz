@@ -9,7 +9,8 @@
            javax.swing.JLabel
            javax.swing.JTextField
            java.awt.GridBagLayout
-           java.awt.GridBagConstraints))
+           java.awt.GridBagConstraints)
+  (:gen-class))
 
 (defn create-frame []
   (doto (JFrame.)
@@ -102,7 +103,7 @@
                                                  (update-status game-state (str "Incorrect. Score " (:score @game-state) " Mistakes " (:mistakes @game-state))))))))
   game-state)
 
-(defn main []
+(defn -main [& args]
   (let [game-state (atom {:status-label (JLabel.)
                           :score 0
                           :mistakes 0
@@ -110,11 +111,5 @@
     (new-level game-state)
     game-state))
 
-(def prog (gen/nice-program))
+;;(def gs (main))
 
-(def gs (main))
-
-(->
- @gs
- :program
- answer-string)

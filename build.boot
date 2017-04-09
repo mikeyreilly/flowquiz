@@ -1,5 +1,5 @@
 (def project 'flowquiz)
-(def version "0.1.0-SNAPSHOT")
+(def version "0.1")
 
 (set-env! :resource-paths #{"resources" "src"}
           :source-paths   #{"test"}
@@ -15,8 +15,8 @@
       :scm         {:url "https://github.com/yourname/flowquiz"}
       :license     {"Eclipse Public License"
                     "http://www.eclipse.org/legal/epl-v10.html"}}
- jar {:main        'flowquiz.core
-      :file        (str "flowquiz-" version "-standalone.jar")})
+ jar {:main        'flowquiz.game
+      :file        (str "flowquiz-" version ".jar")})
 
 (deftask build
   "Build the project locally as a JAR."
