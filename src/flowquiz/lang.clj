@@ -60,7 +60,7 @@
              '* *,
              '> >,
              '- -,
-             '/ /,
+             '/ quot,
              '+ +,
              '== =} op) lhs rhs))))
 
@@ -86,7 +86,7 @@
 (defn- do-assign [state line]
   (let [var (first line)
         expr (drop 2 line)]
-    (let [v (int (eval-expression state expr))
+    (let [v (eval-expression state expr)
           state (assoc state var v)]
 
       (if (< -1000 v 1000)
@@ -123,4 +123,6 @@
         (comp (filter (fn [line] (= '= (second line))))
               (map first))
         prog))
+;; (exec-line {:pc 9, 'a 1, 'b 1, 'c 17, :instruction-count 9}
+;;            '[b = b / c - b])
 

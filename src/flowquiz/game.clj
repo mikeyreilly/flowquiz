@@ -59,8 +59,10 @@
                         :gridwidth 2
                         :insets insets
                         :both true}))
-    (.add pane (JLabel. (str "enter values of " (str/join ", " (l/vars prog)))) (gbc {:gridy 1
-                                                                                      :insets insets}))
+    (.add pane (JLabel. (str "enter values of "
+                             (str/join ", " (l/vars
+                                             program)))) (gbc {:gridy 1
+                                                               :insets insets}))
     (.add pane (create-textfield game-state) (gbc {:gridy 1 :gridx 1
                                                    :insets insets
                                                    :both true}))
@@ -88,28 +90,61 @@
     (str/join " "
               (map #(get end-state %) vars))))
 
+(defn make-input-handler [answer game-state]
+  (fn [attempt]
+    (if (= attempt answer)
+      (do
+        (swap! game-state update :times conj (- (System/currentTimeMillis)
+                                                (:start-time @game-state)))
+
+        (swap! game-state assoc :start-time (System/currentTimeMillis))
+        (swap! game-state update :score inc)
+        (update-status game-state (str "Score " (:score @game-state)
+                                       "Mistakes " (:mistakes @game-state)
+                                       "Last time:" (quot (-> @game-state :times peek) 1000) " seconds"))
+        (new-level game-state))
+      (do
+        (swap! game-state update :mistakes inc)
+        (update-status game-state (str "Incorrect. Score "
+                                       (:score @game-state) "
+                                        Mistakes " (:mistakes
+                                                    @game-state)))))))
+
 (defn new-level [game-state]
   (let [program (gen/nice-program)
         answer (answer-string program)]
     (set-program game-state program)
-    (swap! game-state assoc :input-handler (fn [attempt]
-                                             (if (= attempt answer)
-                                               (do
-                                                 (swap! game-state update :score inc)
-                                                 (update-status game-state (str "Score " (:score @game-state) " Mistakes " (:mistakes @game-state)))
-                                                 (new-level game-state))
-                                               (do
-                                                 (swap! game-state update :mistakes inc)
-                                                 (update-status game-state (str "Incorrect. Score " (:score @game-state) " Mistakes " (:mistakes @game-state))))))))
-  game-state)
+    (swap! game-state assoc
+           :input-handler (make-input-handler answer
+                                              game-state)
+           :start-time (System/currentTimeMillis))) game-state)
 
 (defn -main [& args]
   (let [game-state (atom {:status-label (JLabel.)
                           :score 0
                           :mistakes 0
-                          :frame (create-frame)})]
+                          :frame (create-frame)
+                          :times []})]
     (new-level game-state)
     game-state))
 
-;;(def gs (main))
+(def gs (-main))
 
+;;  (-> @gs :program answer-string)
+
+;; ;; (-> @gs :times)
+
+;; (-> @gs :program)
+
+;; (map 
+;;  #(l/exec '[[a = 1]
+;;  [b = 16 - 12 / 11 * 11]
+;;  [a = b]
+;;  [b = 7 - a]
+;;  [c = 13]
+;;  [a = a - b]
+;;  [c = b]
+;;  [b = c + b]
+;;  [a = c]
+;;             [if c < b then goto 2]]
+;;          %) (range 100))

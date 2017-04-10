@@ -74,7 +74,7 @@
       program)))
 
 (defn nice-program []
-  (->> #(let [program (generate-program 3 20 20)]
+  (->> #(let [program (generate-program 3 10 20)]
           [program
            (try  (l/exec program 100)
                  (catch Exception ex ex))])
