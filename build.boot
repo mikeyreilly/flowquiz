@@ -7,7 +7,7 @@
                             [adzerk/boot-test "RELEASE" :scope "test"]])
 
 (task-options!
- aot {:namespace   #{'flowquiz.core}}
+ aot {:namespace   #{'flowquiz.game}}
  pom {:project     project
       :version     version
       :description "FIXME: write description"
@@ -27,7 +27,7 @@
 (deftask run
   "Run the project."
   [a args ARG [str] "the arguments for the application."]
-  (require '[flowquiz.core :as app])
+  (require '[flowquiz.game :as app])
   (apply (resolve 'app/-main) args))
 
 (require '[adzerk.boot-test :refer [test]])

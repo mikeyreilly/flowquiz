@@ -9,6 +9,7 @@ Single lowercase letters are variable names; they are all integers.
 Lines are labeled by numbers.
 
 There are the usual arithmetic operators.
+/ means integer division (quotient) e.g. 12 / 5 = 2.
 
 There is conditional and unconditional branching.
 
@@ -18,47 +19,22 @@ For now, the programs are presented to the user who will be asked for
 the final value of the variables in the program. Enter these values
 seperated by spaces in the text field provided.
 
-
-
 ## Installation
 
-Download from http://example.com/FIXME.
+git clone https://github.com/mikeyreilly/flowquiz
+cd flowquiz
+boot build
 
 ## Usage
 
-FIXME: explanation
-
-Run the project directly:
-
-    $ boot run
-
-Run the project's tests (they'll fail until you edit them):
-
-    $ boot test
-
 Build an uberjar from the project:
 
-    $ boot build
+$ boot build
 
 Run the uberjar:
 
-    $ java -jar target/flowquiz-0.1.0-SNAPSHOT-standalone.jar [args]
+$ java -jar target/flowquiz-0.1.jar
 
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
 
 ## License
 

@@ -90,6 +90,8 @@
     (str/join " "
               (map #(get end-state %) vars))))
 
+(declare new-level)
+
 (defn make-input-handler [answer game-state]
   (fn [attempt]
     (if (= attempt answer)
@@ -126,9 +128,10 @@
                           :frame (create-frame)
                           :times []})]
     (new-level game-state)
+    (def gs game-state)
     game-state))
 
-(def gs (-main))
+
 
 ;;  (-> @gs :program answer-string)
 
