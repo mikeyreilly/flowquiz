@@ -1,6 +1,8 @@
 # flowquiz
 
-The idea is to be able to generate simple programs, display them to the user and ask the user what they output and keep score of how many correct and incorrect answers are given.
+The idea is to be able to generate simple programs, display them to
+the user and ask the user what they output and keep score of how many
+correct and incorrect answers are given.
 
 The programs will be in a simple language resembling BASIC.
 
@@ -21,9 +23,9 @@ seperated by spaces in the text field provided.
 
 ## Installation
 
-git clone https://github.com/mikeyreilly/flowquiz
-cd flowquiz
-boot build
+	git clone https://github.com/mikeyreilly/flowquiz
+	cd flowquiz
+	boot build
 
 ## Usage
 
